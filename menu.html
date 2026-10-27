@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM Restaurant — Menu</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fdf8f0; color: #222; line-height: 1.6; }
+  nav { background: #1b4332; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  nav a { color: #fdf8f0; text-decoration: none; margin: 0 12px; font-weight: 600; font-size: 15px; }
+  nav a:hover, nav a.active { color: #d4a017; }
+  header { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: #fff; text-align: center; padding: 50px 20px; }
+  header h1 { font-size: 2.2em; letter-spacing: 2px; }
+  header p { color: #d4a017; font-style: italic; margin-top: 8px; }
+  main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+  .search { width: 100%; padding: 12px 16px; border: 2px solid #1b4332; border-radius: 8px; font-size: 1em; margin-bottom: 20px; }
+  .dish { background: #fff; border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08); border-left: 5px solid #d4a017; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; transition: transform .3s, box-shadow .3s; }
+  .dish:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+  .dish img { border-radius: 10px; max-width: 160px; height: auto; cursor: pointer; }
+  .dish-info { flex: 1; min-width: 200px; }
+  .dish-info h3 { color: #1b4332; margin-bottom: 6px; }
+  .price { color: #b07d0a; font-weight: 700; font-size: 1.1em; }
+  .note { background: #e9f5ee; border: 1px solid #1b4332; padding: 12px; border-radius: 8px; font-size: 0.95em; margin: 20px 0; }
+  .no-result { text-align: center; color: #842029; font-weight: 700; padding: 20px; display: none; }
+  footer { background: #1b4332; color: #fdf8f0; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; }
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); justify-content: center; align-items: center; z-index: 999; }
+  #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="welcome.html">Welcome</a>
+  <a href="about.html">About</a>
+  <a href="menu.html" class="active">Menu</a>
+  <a href="chese.html">Cheese</a>
+  <a href="choco.html">Desserts</a>
+  <a href="vege.html">Vegetarian</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<header>
+  <h1>OUR MENU</h1>
+  <p>Something delicious for every appetite</p>
+</header>
+<main>
+  <input type="text" id="search" class="search" placeholder="🔍 Search dishes (e.g. chicken, pasta, salad)..." onkeyup="filterDishes()">
+  <div class="dish" data-name="grilled chicken">
+    <img src="menu.png" alt="Grilled Chicken" onclick="openLightbox(this.src)">
+    <div class="dish-info">
+      <h3>Grilled Chicken</h3>
+      <p>Herb-marinated chicken served with fresh seasonal sides.</p>
+      <p class="price">UGX 28,000</p>
+    </div>
+  </div>
+  <div class="dish" data-name="creamy pasta cheese">
+    <img src="pasta.png" alt="Creamy Pasta" onclick="openLightbox(this.src)">
+    <div class="dish-info">
+      <h3>Creamy Pasta</h3>
+      <p>Rich, creamy pasta finished with herbs and cheese.</p>
+      <p class="price">UGX 24,000</p>
+    </div>
+  </div>
+  <div class="dish" data-name="garden salad vegetarian">
+    <img src="salad.png" alt="Garden Salad" onclick="openLightbox(this.src)">
+    <div class="dish-info">
+      <h3>Garden Salad</h3>
+      <p>Crisp vegetables with a light homemade dressing.</p>
+      <p class="price">UGX 18,000</p>
+    </div>
+  </div>
+  <div class="dish" data-name="chocolate cake dessert">
+    <img src="cake.png" alt="Chocolate Cake" onclick="openLightbox(this.src)">
+    <div class="dish-info">
+      <h3>Chocolate Cake</h3>
+      <p>Moist chocolate cake with a smooth, rich finish.</p>
+      <p class="price">UGX 12,000</p>
+    </div>
+  </div>
+  <p class="no-result" id="noResult">No dishes match your search.</p>
+  <div class="note">
+    <strong>Good to know:</strong> All dishes are prepared fresh to order. Prices are in Ugandan Shillings and include service. Please inform our staff of any allergies.
+  </div>
+</main>
+<footer>
+  <p>HM Restaurant · Kampala, Uganda · +256 700 0123 · hello@hmrestaurant.com</p>
+  <p>Open Mon–Sun: 08:00 AM – 11:00 PM</p>
+</footer>
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbImg" src="" alt="Enlarged"></div>
+
+<script>
+  // Live search filter
+  function filterDishes() {
+    const q = document.getElementById('search').value.toLowerCase();
+    const dishes = document.querySelectorAll('.dish');
+    let visible = 0;
+    dishes.forEach(d => {
+      const match = d.dataset.name.includes(q) || d.querySelector('h3').textContent.toLowerCase().includes(q);
+      d.style.display = match ? 'flex' : 'none';
+      if (match) visible++;
+    });
+    document.getElementById('noResult').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  function openLightbox(src) {
+    document.getElementById('lbImg').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+</script>
+</body>
+</html>

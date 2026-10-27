@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM Restaurant — About Us</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fdf8f0; color: #222; line-height: 1.6; }
+  nav { background: #1b4332; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  nav a { color: #fdf8f0; text-decoration: none; margin: 0 12px; font-weight: 600; font-size: 15px; }
+  nav a:hover, nav a.active { color: #d4a017; }
+  header { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: #fff; text-align: center; padding: 50px 20px; }
+  header h1 { font-size: 2.2em; letter-spacing: 2px; }
+  header p { color: #d4a017; font-style: italic; margin-top: 8px; }
+  main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+  main h2 { color: #1b4332; margin: 20px 0 10px; border-bottom: 2px solid #d4a017; padding-bottom: 5px; }
+  main p { margin-bottom: 15px; }
+  .card { background: #fff; border-left: 5px solid #d4a017; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  main img { border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); max-width: 100%; height: auto; display: block; margin: 20px auto; cursor: pointer; transition: transform .3s; }
+  main img:hover { transform: scale(1.03); }
+  .facts { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 25px 0; }
+  .fact { background: #1b4332; color: #fff; padding: 15px 25px; border-radius: 8px; text-align: center; min-width: 140px; }
+  .fact strong { display: block; font-size: 1.6em; color: #d4a017; }
+  footer { background: #1b4332; color: #fdf8f0; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; }
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); justify-content: center; align-items: center; z-index: 999; }
+  #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="welcome.html">Welcome</a>
+  <a href="about.html" class="active">About</a>
+  <a href="menu.html">Menu</a>
+  <a href="chese.html">Cheese</a>
+  <a href="choco.html">Desserts</a>
+  <a href="vege.html">Vegetarian</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<header>
+  <h1>ABOUT HM RESTAURANT</h1>
+  <p>Where every meal feels special</p>
+</header>
+<main>
+  <div class="card">
+    <p>HM Restaurant brings together great food, friendly service, and a comfortable dining experience. We are proud to serve the Kampala community with dishes prepared fresh every day.</p>
+  </div>
+  <h2>Our Promise</h2>
+  <p>Whether you are enjoying a family meal, meeting a friend, or celebrating a special occasion, we are happy to serve you. Every plate is prepared with care, and every guest is treated like family.</p>
+  <div class="facts">
+    <div class="fact"><strong data-count="8">0</strong>Years of service</div>
+    <div class="fact"><strong data-count="30">0</strong>Menu items</div>
+    <div class="fact"><strong data-count="100">0</strong>% Fresh ingredients</div>
+  </div>
+  <img src="comference.jpg" alt="HM Restaurant dining and conference area" onclick="openLightbox(this.src)">
+  <h2>Reliability You Can Trust</h2>
+  <p>We maintain strict hygiene standards, source fresh local produce, and keep our prices transparent. Our opening hours are consistent every day of the week, and our team is always available to help you plan your visit.</p>
+</main>
+<footer>
+  <p>HM Restaurant · Kampala, Uganda · +256 700 0123 · hello@hmrestaurant.com</p>
+  <p>Open Mon–Sun: 08:00 AM – 11:00 PM</p>
+</footer>
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbImg" src="" alt="Enlarged"></div>
+
+<script>
+  // Count-up animation for trust facts
+  document.querySelectorAll('.fact strong').forEach(el => {
+    const target = +el.dataset.count;
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current + (target === 100 ? '' : '+');
+    }, 30);
+  });
+
+  function openLightbox(src) {
+    document.getElementById('lbImg').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+</script>
+</body>
+</html>

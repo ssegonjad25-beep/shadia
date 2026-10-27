@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM Restaurant — Vegetarian</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fdf8f0; color: #222; line-height: 1.6; }
+  nav { background: #1b4332; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  nav a { color: #fdf8f0; text-decoration: none; margin: 0 12px; font-weight: 600; font-size: 15px; }
+  nav a:hover, nav a.active { color: #d4a017; }
+  header { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: #fff; text-align: center; padding: 50px 20px; }
+  header h1 { font-size: 2.2em; letter-spacing: 2px; }
+  header p { color: #d4a017; font-style: italic; margin-top: 8px; }
+  main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+  .dish { background: #fff; border-radius: 10px; padding: 20px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.08); border-left: 5px solid #d4a017; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; transition: transform .3s, box-shadow .3s; }
+  .dish:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+  .dish img { border-radius: 10px; max-width: 160px; height: auto; cursor: pointer; }
+  .dish-info { flex: 1; min-width: 200px; }
+  .dish-info h3 { color: #1b4332; margin-bottom: 6px; }
+  .price { color: #b07d0a; font-weight: 700; font-size: 1.1em; }
+  .note { background: #e9f5ee; border: 1px solid #1b4332; padding: 12px; border-radius: 8px; font-size: 0.95em; margin: 20px 0; }
+  .toggle { margin: 20px 0; text-align: center; }
+  .toggle button { background: #1b4332; color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: .3s; }
+  .toggle button:hover { background: #d4a017; color: #1b4332; }
+  .extra-info { display: none; background: #fff8e1; border-left: 5px solid #d4a017; padding: 15px; border-radius: 8px; margin: 15px 0; }
+  footer { background: #1b4332; color: #fdf8f0; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; }
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); justify-content: center; align-items: center; z-index: 999; }
+  #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="welcome.html">Welcome</a>
+  <a href="about.html">About</a>
+  <a href="menu.html">Menu</a>
+  <a href="chese.html">Cheese</a>
+  <a href="choco.html">Desserts</a>
+  <a href="vege.html" class="active">Vegetarian</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<header>
+  <h1>VEGETARIAN</h1>
+  <p>Fresh from the garden</p>
+</header>
+<main>
+  <div class="dish">
+    <img src="salad.png" alt="Garden Salad" onclick="openLightbox(this.src)">
+    <div class="dish-info">
+      <h3>Garden Salad</h3>
+      <p>Crisp vegetables with a light homemade dressing.</p>
+      <p class="price">UGX 18,000</p>
+    </div>
+  </div>
+  <div class="toggle">
+    <button onclick="toggleInfo()">Show / Hide Dietary Information</button>
+  </div>
+  <div class="extra-info" id="extraInfo">
+    <p><strong>Dietary Information:</strong> Our vegetarian dishes are prepared separately to avoid cross-contamination. Ingredients include seasonal greens, tomatoes, cucumber, and a light vinaigrette. Please inform staff of any allergies.</p>
+  </div>
+  <div class="note">
+    <strong>Note:</strong> Vegan options are available on request. Ask our team when you visit.
+  </div>
+</main>
+<footer>
+  <p>HM Restaurant · Kampala, Uganda · +256 700 0123 · hello@hmrestaurant.com</p>
+  <p>Open Mon–Sun: 08:00 AM – 11:00 PM</p>
+</footer>
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbImg" src="" alt="Enlarged"></div>
+
+<script>
+  function toggleInfo() {
+    const el = document.getElementById('extraInfo');
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+  function openLightbox(src) {
+    document.getElementById('lbImg').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+</script>
+</body>
+</html>

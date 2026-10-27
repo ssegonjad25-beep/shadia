@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM Restaurant — Home</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fdf8f0; color: #222; line-height: 1.6; }
+  nav { background: #1b4332; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  nav a { color: #fdf8f0; text-decoration: none; margin: 0 12px; font-weight: 600; font-size: 15px; }
+  nav a:hover, nav a.active { color: #d4a017; }
+  header { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: #fff; text-align: center; padding: 60px 20px; position: relative; overflow: hidden; }
+  header h1 { font-size: 2.8em; letter-spacing: 2px; margin-bottom: 10px; animation: fadeUp 1s ease; }
+  header p { font-size: 1.2em; color: #d4a017; font-style: italic; animation: fadeUp 1.4s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  main { max-width: 900px; margin: 40px auto; padding: 0 20px; text-align: center; }
+  main img { border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.15); max-width: 100%; height: auto; margin: 20px 0; cursor: pointer; transition: transform .3s; }
+  main img:hover { transform: scale(1.03); }
+  .tagline { font-size: 1.3em; color: #1b4332; font-weight: 600; }
+  .status { display: inline-block; padding: 8px 18px; border-radius: 20px; font-weight: 700; margin: 15px 0; }
+  .open { background: #d4f4dd; color: #1b4332; }
+  .closed { background: #f8d7da; color: #842029; }
+  .btn { display: inline-block; background: #d4a017; color: #1b4332; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 700; margin: 10px; transition: .3s; }
+  .btn:hover { background: #1b4332; color: #fff; }
+  footer { background: #1b4332; color: #fdf8f0; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; }
+  #topBtn { display: none; position: fixed; bottom: 25px; right: 25px; background: #d4a017; color: #1b4332; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.3); }
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); justify-content: center; align-items: center; z-index: 999; }
+  #lightbox img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="active">Home</a>
+  <a href="welcome.html">Welcome</a>
+  <a href="about.html">About</a>
+  <a href="menu.html">Menu</a>
+  <a href="chese.html">Cheese</a>
+  <a href="choco.html">Desserts</a>
+  <a href="vege.html">Vegetarian</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<header>
+  <h1>HM RESTAURANT</h1>
+  <p>Good food, good moments — in the heart of Kampala</p>
+</header>
+<main>
+  <p class="tagline">Welcome to a place where every meal feels special.</p>
+  <div id="status" class="status"></div>
+  <img src="dinning.png" alt="HM Restaurant dining area" onclick="openLightbox(this.src)">
+  <p>Freshly prepared meals, friendly service, and a warm dining experience for families, friends, and celebrations.</p>
+  <a class="btn" href="menu.html">View Our Menu</a>
+  <a class="btn" href="contact.html">Reserve a Table</a>
+</main>
+<footer>
+  <p>HM Restaurant · Kampala, Uganda · +256 700 0123 · hello@hmrestaurant.com</p>
+  <p>Open Mon–Sun: 08:00 AM – 11:00 PM</p>
+</footer>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbImg" src="" alt="Enlarged"></div>
+
+<script>
+  // Live open/closed status
+  function updateStatus() {
+    const now = new Date();
+    const h = now.getHours();
+    const el = document.getElementById('status');
+    if (h >= 8 && h < 23) { el.textContent = "🟢 We are OPEN now"; el.className = "status open"; }
+    else { el.textContent = "🔴 We are CLOSED — opens at 08:00 AM"; el.className = "status closed"; }
+  }
+  updateStatus(); setInterval(updateStatus, 60000);
+
+  // Image lightbox
+  function openLightbox(src) {
+    document.getElementById('lbImg').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  // Back to top
+  window.onscroll = function() {
+    document.getElementById('topBtn').style.display = window.scrollY > 300 ? 'block' : 'none';
+  };
+</script>
+</body>
+</html>

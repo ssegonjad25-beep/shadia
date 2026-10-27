@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM Restaurant — Contact & Reservations</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #fdf8f0; color: #222; line-height: 1.6; }
+  nav { background: #1b4332; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  nav a { color: #fdf8f0; text-decoration: none; margin: 0 12px; font-weight: 600; font-size: 15px; }
+  nav a:hover, nav a.active { color: #d4a017; }
+  header { background: linear-gradient(135deg, #1b4332, #2d6a4f); color: #fff; text-align: center; padding: 50px 20px; }
+  header h1 { font-size: 2.2em; letter-spacing: 2px; }
+  header p { color: #d4a017; font-style: italic; margin-top: 8px; }
+  main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 25px 0; }
+  .card { background: #fff; border-radius: 10px; padding: 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); border-top: 4px solid #d4a017; }
+  .card h2 { color: #1b4332; margin-bottom: 10px; font-size: 1.2em; }
+  .card p { margin-bottom: 6px; }
+  .card a { color: #1b4332; font-weight: 600; }
+  .form-card { background: #fff; border-radius: 10px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); border-top: 4px solid #1b4332; margin: 25px 0; }
+  form label { display: block; font-weight: 600; margin: 12px 0 4px; color: #1b4332; }
+  form input, form select, form textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 15px; }
+  form input:focus, form select:focus, form textarea:focus { outline: none; border-color: #d4a017; box-shadow: 0 0 0 3px rgba(212,160,23,0.2); }
+  form button { background: #d4a017; color: #1b4332; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 700; font-size: 1em; cursor: pointer; margin-top: 15px; transition: .3s; }
+  form button:hover { background: #1b4332; color: #fff; }
+  .form-message { margin-top: 15px; padding: 12px; border-radius: 6px; font-weight: 600; display: none; }
+  .form-message.success { background: #d4f4dd; color: #1b4332; display: block; }
+  .form-message.error { background: #f8d7da; color: #842029; display: block; }
+  .images { display: flex; gap: 15px; justify-content: center; margin: 25px 0; flex-wrap: wrap; }
+  .images img { border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  footer { background: #1b4332; color: #fdf8f0; text-align: center; padding: 20px; margin-top: 40px; font-size: 14px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="welcome.html">Welcome</a>
+  <a href="about.html">About</a>
+  <a href="menu.html">Menu</a>
+  <a href="chese.html">Cheese</a>
+  <a href="choco.html">Desserts</a>
+  <a href="vege.html">Vegetarian</a>
+  <a href="contact.html" class="active">Contact</a>
+</nav>
+<header>
+  <h1>CONTACT &amp; RESERVATIONS</h1>
+  <p>We would love to serve you</p>
+</header>
+<main>
+  <div class="grid">
+    <div class="card"><h2>📍 Location</h2><p>Kampala, Uganda</p></div>
+    <div class="card"><h2>📞 Phone</h2><p><a href="tel:+2567000123">+256 700 0123</a></p></div>
+    <div class="card"><h2>✉️ Email</h2><p><a href="mailto:hello@hmrestaurant.com">hello@hmrestaurant.com</a></p></div>
+    <div class="card"><h2>🕒 Opening Hours</h2><p>Monday – Sunday</p><p>08:00 AM – 11:00 PM</p></div>
+  </div>
+
+  <div class="form-card">
+    <h2 style="color:#1b4332;margin-bottom:10px;">Book Your Table</h2>
+    <p>Planning a meal with family or friends? Reserve your table today.</p>
+    <form id="reservationForm" novalidate>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="e.g. Amina Nakato" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="e.g. +256 700 0123" required>
+
+      <label for="date">Reservation Date</label>
+      <input type="date" id="date" required>
+
+      <label for="guests">Number of Guests</label>
+      <select id="guests" required>
+        <option value="">Select…</option>
+        <option value="1">1 guest</option>
+        <option value="2">2 guests</option>
+        <option value="3">3 guests</option>
+        <option value="4">4 guests</option>
+        <option value="5">5 guests</option>
+        <option value="6">6+ guests</option>
+      </select>
+
+      <label for="notes">Special Requests (optional)</label>
+      <textarea id="notes" rows="3" placeholder="Allergies, seating preference, etc."></textarea>
+
+      <button type="submit">Request Reservation</button>
+      <div id="formMessage" class="form-message"></div>
+    </form>
+  </div>
+
+  <div class="images">
+    <img src="snack.png" width="100" height="100" alt="Snack platter">
+    <img src="resort.png" width="100" height="100" alt="Relaxing dining environment">
+  </div>
+</main>
+<footer>
+  <p>HM Restaurant · Kampala, Uganda · +256 700 0123 · hello@hmrestaurant.com</p>
+  <p>Open Mon–Sun: 08:00 AM – 11:00 PM</p>
+</footer>
+
+<script>
+  const form = document.getElementById('reservationForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const date = document.getElementById('date').value;
+    const guests = document.getElementById('guests').value;
+    const msg = document.getElementById('formMessage');
+    msg.className = 'form-message';
+
+    if (name.length < 2) {
+      msg.textContent = "Please enter your full name (at least 2 characters).";
+      msg.classList.add('error'); return;
+    }
+    if (!/^[+\d][\d\s-]{6,}$/.test(phone)) {
+      msg.textContent = "Please enter a valid phone number (e.g. +256 700 0123).";
+      msg.classList.add('error'); return;
+    }
+    if (!date) {
+      msg.textContent = "Please choose a reservation date.";
+      msg.classList.add('error'); return;
+    }
+    if (!guests) {
+      msg.textContent = "Please select the number of guests.";
+      msg.classList.add('error'); return;
+    }
+
+    msg.textContent = `Thank you, ${name}! Your table for ${guests} guest(s) on ${date} has been requested. We will call you at ${phone} to confirm.`;
+    msg.classList.add('success');
+    form.reset();
+  });
+</script>
+</body>
+</html>
